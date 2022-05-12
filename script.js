@@ -4,22 +4,29 @@ let pTag = document.querySelector(".quote");
 let input = document.querySelector(".input");
 let spans = []; 
 let body = document.querySelector("body");
+let title = document.querySelector("#title");
 //grab from APIs --> or not, do it local
 
 let dummysentance = quotes[Math.floor(Math.random() * quotes.length)];
 
 //define functions
 
-let splitter = (sentance) => {
+const delaySeconds = (time) => {
+  time *= 1000;
+  return new Promise(resolve => setTimeout(resolve, time));
+}
+
+const splitter = (sentance) => {
     let wordArr = sentance.split(" ");
     return wordArr;
 }
 
-let synonymer = (word) =>{
+const synonymer = (word) =>{
     for(let i=0; i < thesaurus.length; i++){
         if(word.toLowerCase() === thesaurus[i].word){
-            console.log(thesaurus[i].synonyms[0]);
-            return thesaurus[i].synonyms[0];
+          let synonym = thesaurus[i].synonyms[Math.floor(Math.random() * thesaurus[i].synonyms.length)];
+          console.log(`${word} : ${synonym}`);  
+          return synonym;
         }
     }
 }
@@ -43,7 +50,12 @@ let inputHandler = (e) => {
     if(currArr.join() === answer){
        //display win condition
         body.classList.add("wincon");
-        pTag.remove();
+      pTag.remove();
+      //win logic here.. some kind of score.. for now delay then refresh
+      title.innerHTML = "Congradulations!!"
+      delaySeconds(2.5).then(() => window.location.reload())
+
+
     }
 
 }
