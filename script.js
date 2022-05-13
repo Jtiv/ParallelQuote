@@ -1,5 +1,4 @@
-//grab document elements and set up base variables
-let sent = document.querySelector(".board");
+//grab document elements and set up base variables let sent = document.querySelector(".board");
 let pTag = document.querySelector(".quote");
 let input = document.querySelector(".input");
 let spans = []; 
@@ -52,7 +51,7 @@ let inputHandler = (e) => {
         body.classList.add("wincon");
       pTag.remove();
       //win logic here.. some kind of score.. for now delay then refresh
-      title.innerHTML = "Congradulations!!"
+      title.innerHTML = "Congratulations!!"
       delaySeconds(2.5).then(() => window.location.reload())
 
 
